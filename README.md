@@ -1,63 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Задание
+Разработать простую систему учета посещений на предприятии. Есть минимальная информация о рабочем (ФИО, табельный номер, телефон) и данные о посещении (дата и время прихода, дата и время ухода). Аутентификацией можно пренебречь.
+Необходимо реализовать Rest API
+- CRUD операции над справочником рабочих
+- Фиксацию времени посещения одного рабочего
+- Простой интерфейс для отображения табелей посещения рабочих с фильтрацией по (дате, рабочему)  
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+В качестве backend использовать Laravel (версия не важна).  
+Проект должен быть рабочий и иметь какой-нибудь способ наполнения тестовыми данными. Наличие документации будет плюсом.   Проект нужно разместить на github или других сервисах.  
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Установка
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- клонируйте репозиторий
+- затяните зависимости
+```bash 
+composer install
+```
+- настройте подключение к БД в config/database.php
+- запустите локальный сервер
+```bash
+php artisan serve
+```
+- при необходимости заполните базу тестовыми данными  
+```bash
+php artisan db:seed
+```
+> По-умолчанию интерфейс доступен корне (например http://127.0.0.1:8000/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Структура API
 
-## Learning Laravel
+### Worker API  
+CRUD operations by worker. *All response sends in JSON format*
+_________
+**DESCRIPTION** : get all workers  
+**HTTP VERB** : GET  
+**URL**: {url}/api/workers  
+**BODY**: NONE
+____________________
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**DESCRIPTION** : create new worker  
+**HTTP VERB** : POST  
+**URL**: {url}/api/workers  
+**BODY**: 
+```json
+{
+	"name": "Петя",
+	"surname": "Пупкин",
+	"middle_name": "Иванович",
+	"phone": "89522323223",
+	"id": 123
+}
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+Arguments for create:  
+**name**: *String* Worker name .Field is required.
+**surname**: *String* Worker surname .Field is required.  
+**middle_name**: *?String* Worker middlename .Field is optional.  
+**phone**: *?String* Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
+**id**: *?int(min value = 1)* Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
+_____________
+**DESCRIPTION** : update existing worker  
+**HTTP VERB** : PUT/PATCH  
+**URL**: {url}/api/workers/{workerID}  
+**BODY**: 
+```json
+{
+	"name": "Петя",
+	"surname": "Пупкин",
+	"middle_name": "Иванович",
+	"phone": "89522323223",
+	"id": 123
+}
 
-## Laravel Sponsors
+```
+Arguments for create:  
+**name**: *?String* Worker name .Field is optional.
+**surname**: *?String* Worker surname .Field is optional.  
+**middle_name**: *?String* Worker middlename .Field is optional.  
+**phone**: *?String* Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
+**id**: *?int(min value = 1)* Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+_____________________
+**DESCRIPTION** :show existing worker information by id  
+**HTTP VERB** : GET  
+**URL**: {url}/api/workers/{workerID}  
+**BODY**: NONE
+_____________________
+**DESCRIPTION** :remove worker with his timesheets by id.  
+**HTTP VERB** : DELETE  
+**URL**: {url}/api/workers/{workerID}  
+**BODY**: NONE
 
-### Premium Partners
+***
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+### Worker Timesheet API   
+Contain feature to add worker timesheet. *All response sends in JSON format*  
+_____
+**DESCRIPTION** : create new worker timesheet.   
+**HTTP VERB** : POST    
+**URL**: {url}/api/timesheets  
+**BODY**: 
+```json
+{
+	"worker_id": 24,
+	"datetime_in": "2021-07-25 12:43:23",
+	"datetime_out":"2021-07-25 13:23:22"
+}
 
-## Contributing
+```
+Arguments for create:  
+**worker_id**: *integer(min=1)* Worker tabel number.If worker does not exist, error will be returned. Field is required. **datetime_in**: *string in Y-M-D H:Y:s format* Worker datetime in. Filed is required.  
+**datetime_out**: *string in Y-M-D H:Y:s format* Worker datetime out. Filed is required.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+_____
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# laravel-attendance-api
