@@ -16,7 +16,7 @@
 ```bash 
 composer install
 ```
-- настройте подключение к БД в config/database.php
+- настройте подключение к БД в .env
 - запустите локальный сервер
 ```bash
 php artisan serve
