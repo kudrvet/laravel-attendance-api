@@ -27,7 +27,7 @@ class WorkerTimesheetFactory extends Factory
         $datetimeOut = $time->add(new \DateInterval("PT6H"));
 
         return [
-            'datetime_in' => $datetimeIn,
+            'datetime_in'  => $datetimeIn,
             'datetime_out' => $datetimeOut,
         ];
     }

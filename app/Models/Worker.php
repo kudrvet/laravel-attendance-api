@@ -13,11 +13,15 @@ class Worker extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function timesheets()
     {
         return $this->hasMany(WorkerTimesheet::class,'worker_id','id');
     }
 
+   /**  delete related timesheets */
     public static function boot() {
         parent::boot();
         self::deleting(function($worker) {

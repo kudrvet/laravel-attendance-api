@@ -24,7 +24,7 @@ class TimesheetCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'worker_id'    => 'required|integer|exists:workers,id',
+            'worker_id'    => 'required|integer|exists:workers,id|min:1',
             'datetime_in'  => 'required|date_format:Y-m-d H:i:s',
             'datetime_out' => 'required|date_format:Y-m-d H:i:s|after:datetime_in',
         ];

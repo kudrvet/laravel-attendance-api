@@ -22,10 +22,10 @@ class WorkerFactory extends Factory
     {
         $faker = \Faker\Factory::create('ru_RU');
         return [
-            'name' => $faker->firstNameMale(),
-            'surname' => $faker->lastName($gender='male'),
+            'name'        => $faker->firstNameMale(),
+            'surname'     => $faker->lastName($gender='male'),
             'middle_name' => $faker->middleNameMale(),
-            'phone' => $faker->phoneNumber()
+            'phone'       => $faker->phoneNumber()
         ];
     }
 }

@@ -24,12 +24,11 @@ class WorkerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'   => array('unique:workers,id', 'integer'),
-            'name' => 'string',
-            'surname' => 'string',
+            'id'          => array('unique:workers,id', 'integer', 'min:1'),
+            'name'        => 'string',
+            'surname'     => 'string',
             'middle_name' => 'string',
-            'phone' => array('regex:/^((\+7|7|8)+([0-9]){10})$/u')
+            'phone'       => array('regex:/^((\+7|7|8)+([0-9]){10})$/u')
         ];
     }
-
 }

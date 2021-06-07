@@ -24,11 +24,11 @@ class WorkerCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'   => array('unique:workers,id', 'integer'),
-            'name' => 'required | string',
-            'surname' => 'required | string',
+            'id'          => array('unique:workers,id', 'min:1', 'integer'),
+            'name'        => 'required | string',
+            'surname'     => 'required | string',
             'middle_name' => 'string',
-            'phone' => array('regex:/^((\+7|7|8)+([0-9]){10})$/u')
+            'phone'       => array('regex:/^((\+7|7|8)+([0-9]){10})$/u')
         ];
     }
 
