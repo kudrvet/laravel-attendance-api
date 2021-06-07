@@ -16,8 +16,12 @@
 ```bash 
 composer install
 ```
-- настройте подключение к БД в .env
-- заупстите миграции
+- сгенерируйте app key
+```bash
+ php artisan key:generate
+ ```
+- создайте .env файл в корне и настройте подключение к БД по аналогии с .env.example
+- запустите миграции
 ```bash
 php artisan migrate
 ```
