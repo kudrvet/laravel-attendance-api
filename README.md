@@ -29,7 +29,7 @@ php artisan db:seed
 
 ## Структура API
 
-### Worker API  
+### 1. Worker API  
 CRUD operations by worker. *All response sends in JSON format*
 _________
 **DESCRIPTION** : get all workers  
@@ -93,7 +93,7 @@ _____________________
 
 ***
 
-### Worker Timesheet API   
+### 2. Worker Timesheet API   
 Contain feature to add worker timesheet. *All response sends in JSON format*  
 _____
 **DESCRIPTION** : create new worker timesheet.   
