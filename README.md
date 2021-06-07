@@ -16,8 +16,12 @@
 ```bash 
 composer install
 ```
-- настройте подключение к БД в .env
-- заупстите миграции
+- сгенерируйте app key
+```bash
+ php artisan key:generate
+ ```
+- создайте .env файл в корне и настройте подключение к БД по аналогии с .env.example
+- запустите миграции
 ```bash
 php artisan migrate
 ```
@@ -62,11 +66,11 @@ ____________________
 
 ```
 Arguments for create:  
-**name**: *String* Worker name .Field is required.
-**surname**: *String* Worker surname .Field is required.  
-**middle_name**: *?String* Worker middlename .Field is optional.  
-**phone**: *?String* Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
-**id**: *?int(min value = 1)* Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
+**name**: *String* | Worker name .Field is required.
+**surname**: *String* | Worker surname .Field is required.  
+**middle_name**: *?String* | Worker middlename .Field is optional.  
+**phone**: *?String* | Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
+**id**: *?int(min value = 1)* | Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
 _____________
 **DESCRIPTION** : update existing worker  
 **HTTP VERB** : PUT/PATCH  
@@ -83,19 +87,19 @@ _____________
 
 ```
 Arguments for create:  
-**name**: *?String* Worker name .Field is optional.
-**surname**: *?String* Worker surname .Field is optional.  
-**middle_name**: *?String* Worker middlename .Field is optional.  
-**phone**: *?String* Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
-**id**: *?int(min value = 1)* Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
+**name**: *?String* | Worker name .Field is optional.
+**surname**: *?String* | Worker surname .Field is optional.  
+**middle_name**: *?String* | Worker middlename .Field is optional.  
+**phone**: *?String* | Phone number in (+7|7|8)XXXXXXX format.Field is optional.  
+**id**: *?int(min value = 1)* | Worker tabel number.If worker with 'id' is already exist error will be returned. If is empty, will be generated automatically. Field is optional.  
 
 _____________________
-**DESCRIPTION** :show existing worker information by id  
+**DESCRIPTION** : show existing worker information by id  
 **HTTP VERB** : GET  
 **URL**: {url}/api/workers/{workerID}  
 **BODY**: NONE
 _____________________
-**DESCRIPTION** :remove worker with his timesheets by id.  
+**DESCRIPTION** : remove worker with his timesheets by id.  
 **HTTP VERB** : DELETE  
 **URL**: {url}/api/workers/{workerID}  
 **BODY**: NONE
@@ -118,8 +122,8 @@ _____
 
 ```
 Arguments for create:  
-**worker_id**: *integer(min=1)* Worker tabel number.If worker does not exist, error will be returned. Field is required. **datetime_in**: *string in Y-M-D H:Y:s format* Worker datetime in. Filed is required.  
-**datetime_out**: *string in Y-M-D H:Y:s format* Worker datetime out. Filed is required.
+**worker_id**: *integer(min=1)* | Worker tabel number.If worker does not exist, error will be returned. Field is required. **datetime_in**: *string in Y-M-D H:Y:s format* | Worker datetime in. Filed is required.  
+**datetime_out**: *string in Y-M-D H:Y:s format* | Worker datetime out. This date shoud be later than datetime_in. Field is required.
 
 _____
 
