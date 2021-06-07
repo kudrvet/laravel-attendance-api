@@ -1,6 +1,3 @@
-<?php
-
-?>
 @extends('layouts.app')
 
 @section('content')
@@ -41,7 +38,6 @@
             @endforeach
             </tbody>
         </table>
-{{--        {{$timesheets->links()}}--}}
         {{$timesheets->links("pagination::bootstrap-4")}}
     </div>
 @endsection
